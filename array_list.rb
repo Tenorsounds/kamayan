@@ -40,14 +40,6 @@ class ArrayList
     return self
   end
 
-  # Define a "delete" method which takes a single index argument. This method
-  # should delete the value at the provided index and return it. The size should
-  # be 1 less than it was before this method was called. The index must be
-  # within the bounds of the ArrayList, or an IndexError should be raised.
-
-  def delete(index)
-  end
-
   # Define a method "[]=" which takes 2 arguments. This method should set the
   # value at the index defined in the first argument such that array_list[index]
   # will return the second argument.
@@ -65,6 +57,28 @@ class ArrayList
   # index will add the difference to the size.
 
   def []=(index, value)
+    check_lower_bound(index)
+    expand_array while @array.size < index
+    @array[index] = value
+    @size = index + 1 if index >= @size
+  end
+
+  # Define a "delete" method which takes a single index argument. This method
+  # should delete the value at the provided index and return it. The size should
+  # be 1 less than it was before this method was called. The index must be
+  # within the bounds of the ArrayList, or an IndexError should be raised.
+
+  def delete(index)
+    check_bounds(index)
+    result = @array[index]
+    @size -= 1
+
+    index.upto(@size - 1) do |i|
+      @array[i] = @array[i+1]
+    end
+
+    @array[@size] = nil
+    return result
   end
 
   private
