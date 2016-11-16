@@ -60,6 +60,19 @@ class LinkedList
   # within the bounds of the LinkedList, or an IndexError should be raised.
 
   def delete(index)
+    check_bounds(index)
+
+    if index == 0
+      deleting = @head
+      @head = @head.child
+    else
+      before = find_node(index - 1)
+      deleting = before.child
+      before.child = before.child.child
+    end
+
+    @size -= 1
+    deleting.value
   end
 
   # Define a method "[]" which takes a single index argument. This method should
@@ -67,21 +80,13 @@ class LinkedList
   # of the LinkedList, or an IndexError should be raised.
 
   def [](index)
-    currentNode = @head
     check_bounds(index)
-    0.upto(index) do |i|
-      return currentNode.value if i == index
-      currentNode = currentNode.child
-    end
+    find_node(index).value
   end
 
   # Define a method "[]=" which takes 2 arguments. This method should set the
   # value at the index defined in the first argument such that
   # linked_list[index] will return the second argument.
-
-  def []=(index, value)
-  end
-
   #
   # If the index is negative, an IndexError should be raised.
   #
@@ -93,7 +98,19 @@ class LinkedList
   # existing index would not affect the size, but an index greater than the last
   # index will add the difference to the size.
 
+  def []=(index, value)
+    check_lower_bound(index)
+    self << nil while index >= size
+    find_node(index).value = value
+  end
+
   private
+
+  def find_node(index)
+    node = @head
+    index.times {node = node.child }
+    node
+  end
 
   def check_bounds(index)
     check_lower_bound(index)
