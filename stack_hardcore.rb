@@ -2,12 +2,12 @@ class StackOverflowError < StandardError
 end
 
 class Stack
-  def initialize(max_size = nil)
+  def initialize(max_size)
     @max_size = max_size
     # You may use any of the collections you've built so far, though you will
     # need to implement `each` for that collection if you use something other
     # than DoublyLinkedList.
-    @list = DoublyLinkedList.new
+    @list = FixedArray.new
   end
 
   def size
@@ -22,11 +22,6 @@ class Stack
   # capacity.
 
   def push(value)
-    overflow_check()
-
-    @list << value
-
-    return self
   end
 
   # Define a method "pop" which takes no arguments. This method should remove
@@ -34,21 +29,18 @@ class Stack
   # the Stack is empty.
 
   def pop
-    @list.delete_last
   end
 
   # Define a method "empty?" which takes no arguments. This method should return
   # whether or not the size is 0.
 
   def empty?
-    @list.size == 0
   end
 
   # Define a method "peek" which takes no arguments. This method should return
   # the last value in the stack, without removing any elements in the stack.
 
   def peek
-    @list.last
   end
 
   private

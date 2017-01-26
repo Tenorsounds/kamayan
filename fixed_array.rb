@@ -17,6 +17,17 @@ class FixedArray
     @array.size
   end
 
+  def each
+    index = 0
+
+    while index < @array.size
+      yield @array[index]
+      index += 1
+    end
+
+    return self
+  end
+
   private
 
   def check_bounds(index)
