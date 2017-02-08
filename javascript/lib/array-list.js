@@ -21,9 +21,26 @@ ArrayList.prototype.get = function(index) {
 // append the argument to the end of this ArrayList and increase the size by
 // 1. The return value must be this.
 
+ArrayList.prototype.add = function(value) {
+    if (this._size >= this._array.size()) {
+        this._expandArray();
+    }
+
+    this._array.set(this._size, value);
+    this._size += 1;
+    return this;
+};
+
 // Define a method "prepend" which takes a single argument. This method should
 // prepend the argument to the beginning of this ArrayList and increase the size
 // by 1. The return value must be this.
+
+ArrayList.prototype.prepend = function(value) {
+    this._shiftArray();
+    this._array.set(0, value);
+    this._size += 1;
+    return this;
+};
 
 // Define a "delete" method which takes a single index argument. This method
 // should delete the value at the provided index and return it. The size should
@@ -64,6 +81,29 @@ ArrayList.prototype._checkUpperBound = function(index) {
     if (index >= this.size()) {
         throw new IndexError("Invalid index: " + index);
     }
+};
+
+ArrayList.prototype._shiftArray = function() {
+    var i;
+
+    for (i = this._size; i >= 1; i--) {
+        this._array.set(i, this._array.get(i-1));
+    }
+};
+
+ArrayList.prototype._expandArray = function(shift) {
+    if (shift == undefined) {
+        shift = 0;
+    }
+
+    var i,
+    newArray = new FixedArray(this._array.size() * 2);
+
+    for (i=0; i <= this._size-1; i++) {
+        newArray.set(i + shift, this._array.get(i));
+    }
+
+    this._array = newArray;
 };
 
 module.exports = ArrayList;
