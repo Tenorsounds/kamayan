@@ -36,8 +36,14 @@ ArrayList.prototype.add = function(value) {
 // by 1. The return value must be this.
 
 ArrayList.prototype.prepend = function(value) {
-    this._shiftArray();
+    if (this._size >= this._array.size()) {
+        this._expandArray(1);
+    } else {
+        this._shiftArray();
+    }
+
     this._array.set(0, value);
+
     this._size += 1;
     return this;
 };
@@ -46,6 +52,21 @@ ArrayList.prototype.prepend = function(value) {
 // should delete the value at the provided index and return it. The size should
 // be 1 less than it was before this method was called. The index must be within
 // the bounds of the ArrayList, or an IndexError should be thrown.
+
+ArrayList.prototype.delete = function(index) {
+    var result;
+
+    this._checkBounds(index);
+    result = this._array.get(index);
+    this._size -= 1;
+
+    for (var i = index; i < this._size; i++) {
+        this._array.set(i, this._array.get(i+1));
+    }
+
+    this._array.set(this._size, null);
+    return result;
+};
 
 // Define a method "set" which takes 2 arguments. This method should set the
 // value at the index defined in the first argument such that list.get(index)
@@ -66,6 +87,26 @@ ArrayList.prototype.prepend = function(value) {
 // This method should return the value that was previously in the given index,
 // or null if that does not apply.
 
+ArrayList.prototype.set = function(index, value) {
+    var oldValue;
+
+    this._checkLowerBound(index);
+
+    while (this._array.size() <= index) {
+        this._expandArray();
+    }
+
+    oldValue = this._array.get(index);
+
+    this._array.set(index, value);
+
+    if (index >= this._size) {
+        this._size = index + 1;
+    }
+
+    return oldValue;
+};
+
 ArrayList.prototype._checkBounds = function(index) {
     this._checkLowerBound(index);
     this._checkUpperBound(index);
@@ -84,10 +125,8 @@ ArrayList.prototype._checkUpperBound = function(index) {
 };
 
 ArrayList.prototype._shiftArray = function() {
-    var i;
-
-    for (i = this._size; i >= 1; i--) {
-        this._array.set(i, this._array.get(i-1));
+    for (var i = this._size - 1; i >= 0; i--) {
+        this._array.set(i+1, this._array.get(i));
     }
 };
 
@@ -96,10 +135,9 @@ ArrayList.prototype._expandArray = function(shift) {
         shift = 0;
     }
 
-    var i,
-    newArray = new FixedArray(this._array.size() * 2);
+    var newArray = new FixedArray(this._array.size() * 2);
 
-    for (i=0; i <= this._size-1; i++) {
+    for (var i=0; i < this._size; i++) {
         newArray.set(i + shift, this._array.get(i));
     }
 

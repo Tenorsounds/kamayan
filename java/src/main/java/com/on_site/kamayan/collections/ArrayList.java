@@ -93,15 +93,15 @@ public class ArrayList {
     }
 
     private void shiftArray() {
-        for (int i=size; i>=1; i--) {
-            array[i] = array[i-1];
+        for (int i = size - 1; i >= 0; i--) {
+            array[i+1] = array[i];
         }
     }
 
     private void expandArray(int shift) {
         Object[] newArray = new Object[array.length * 2];
 
-        for (int i=0; i <= size-1; i++) {
+        for (int i=0; i < size; i++) {
             newArray[i + shift] = array[i];
         }
 
