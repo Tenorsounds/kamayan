@@ -45,10 +45,11 @@ public class Serving_03_LinkedListsTest extends TestCase {
     public void prependAddsToTheBeginning() {
         LinkedList list = new LinkedList();
         list.prepend(42);
-        assertNotNull(Kamayan.getField(list, Integer.class, "head"));
+        assertNotNull(Kamayan.getField(list, Object.class, "head"));
         assertEquals(42, Kamayan.getField(list, Integer.class, "head", "value"));
         list.prepend(43);
         assertEquals(43, Kamayan.getField(list, Integer.class, "head", "value"));
+        assertNotNull(Kamayan.getField(list, Object.class, "head", "child"));
         assertEquals(42, Kamayan.getField(list, Integer.class, "head", "child", "value"));
         assertNull(Kamayan.getField(list, Object.class, "head", "child", "child"));
     }
@@ -82,8 +83,9 @@ public class Serving_03_LinkedListsTest extends TestCase {
 
         Ref<Object> node = Ref.of(Kamayan.getField(list, Object.class, "head"));
         Kamayan.times(100, (i) -> {
+            assertNotNull(node.get());
             assertEquals(42, Kamayan.getField(node.get(), Integer.class, "value"));
-            node.set(Kamayan.getField(node, Object.class, "child"));
+            node.set(Kamayan.getField(node.get(), Object.class, "child"));
         });
     }
 
@@ -92,9 +94,11 @@ public class Serving_03_LinkedListsTest extends TestCase {
     public void addAddsToTheEnd() {
         LinkedList list = new LinkedList();
         list.add(42);
+        assertNotNull(Kamayan.getField(list, Object.class, "head"));
         assertEquals(42, Kamayan.getField(list, Integer.class, "head", "value"));
         list.add(43);
         assertEquals(42, Kamayan.getField(list, Integer.class, "head", "value"));
+        assertNotNull(Kamayan.getField(list, Object.class, "head", "child"));
         assertEquals(43, Kamayan.getField(list, Integer.class, "head", "child", "value"));
         assertNull(Kamayan.getField(list, Object.class, "head", "child", "child"));
     }
@@ -128,8 +132,9 @@ public class Serving_03_LinkedListsTest extends TestCase {
 
         Ref<Object> node = Ref.of(Kamayan.getField(list, Object.class, "head"));
         Kamayan.times(100, (i) -> {
+            assertNotNull(node.get());
             assertEquals(42, Kamayan.getField(node.get(), Integer.class, "value"));
-            node.set(Kamayan.getField(node, Object.class, "child"));
+            node.set(Kamayan.getField(node.get(), Object.class, "child"));
         });
     }
 
