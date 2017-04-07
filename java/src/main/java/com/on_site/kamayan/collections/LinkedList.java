@@ -34,19 +34,62 @@ public class LinkedList {
     }
 
     public LinkedList prepend(Object value) {
-        throw Kamayan.todo(
-            "The prepend(Object) method should prepend the argument to the",
-            "beginning of this LinkedList and increase the size by 1. The",
-            "return value must be this."
-        );
+        // throw Kamayan.todo(
+        //     "The prepend(Object) method should prepend the argument to the",
+        //     "beginning of this LinkedList and increase the size by 1. The",
+        //     "return value must be this."
+        // );
+
+        Node node = new Node(value, head);
+
+        head = node;
+        size ++;
+
+        return this;
     }
 
     public LinkedList add(Object value) {
-        throw Kamayan.todo(
-            "The add(Object) method should append the argument to the end of",
-            "this LinkedList and increase the size by 1. The return value must",
-            "be this."
-        );
+        // throw Kamayan.todo(
+        //     "The add(Object) method should append the argument to the end of",
+        //     "this LinkedList and increase the size by 1. The return value must",
+        //     "be this."
+        // );
+
+        Node node = new Node(value);
+
+        if (head == null) {
+            head = node;
+        } else {
+            Node currentNode = head;
+
+            while (currentNode.child != null) {
+                currentNode = currentNode.child;
+            }
+
+            currentNode.child = node;
+        }
+
+        size++;
+
+        return this;
+    }
+
+    public Object get(int index) {
+        // throw Kamayan.todo(
+        //     "The get(int) method should retrieve the value at the given index.",
+        //     "The index must be within the bounds of the LinkedList, or an",
+        //     "IndexOutOfBoundsException should be thrown."
+        // );
+
+        checkBounds(index);
+
+        Node currentNode = head;
+
+        for (int i=0; i < index; i++) {
+            currentNode = currentNode.child;
+        }
+
+        return currentNode.value;
     }
 
     public Object delete(int index) {
@@ -55,14 +98,6 @@ public class LinkedList {
             "index and return it. The size should be 1 less than it was before",
             "this method was called. The index must be within the bounds of the",
             "LinkedList, or an IndexOutOfBoundsException should be thrown."
-        );
-    }
-
-    public Object get(int index) {
-        throw Kamayan.todo(
-            "The get(int) method should retrieve the value at the given index.",
-            "The index must be within the bounds of the LinkedList, or an",
-            "IndexOutOfBoundsException should be thrown."
         );
     }
 
