@@ -19,6 +19,10 @@ public class LinkedList {
         public Object value;
         public Node child;
 
+        public Node() {
+            this(null, null);
+        }
+
         public Node(Object value) {
             this(value, null);
         }
@@ -69,50 +73,81 @@ public class LinkedList {
             currentNode.child = node;
         }
 
-        size ++;
+        size++;
 
         return this;
     }
 
-    public Object delete(int index) {
-        throw Kamayan.todo(
-            "The delete(int) method should delete the value at the provided",
-            "index and return it. The size should be 1 less than it was before",
-            "this method was called. The index must be within the bounds of the",
-            "LinkedList, or an IndexOutOfBoundsException should be thrown."
-        );
-    }
-
     public Object get(int index) {
-        throw Kamayan.todo(
-            "The get(int) method should retrieve the value at the given index.",
-            "The index must be within the bounds of the LinkedList, or an",
-            "IndexOutOfBoundsException should be thrown."
-        );
+        // throw Kamayan.todo(
+        //     "The get(int) method should retrieve the value at the given index.",
+        //     "The index must be within the bounds of the LinkedList, or an",
+        //     "IndexOutOfBoundsException should be thrown."
+        // );
+
+        checkBounds(index);
+
+        return goToIndexAndExpandList(index).value;
     }
 
     public Object set(int index, Object value) {
-        throw Kamayan.todo(
-            "The set(int, Object) method should set the value at the index",
-            "defined in the first argument such that list.get(index) will",
-            "return the second argument.",
-            "",
-            "If the index is negative, an IndexOutOfBoundsException should be",
-            "thrown.",
-            "",
-            "If the index is bigger than the current size of the linked list,",
-            "the links should be adjusted to fit the new index. All indexes",
-            "between the former last element and the new index should be",
-            "initialized with null.",
-            "",
-            "The size after this method is called depends on the index",
-            "provided. An existing index would not affect the size, but an",
-            "index greater than the last index will add the difference to the",
-            "size.",
-            "",
-            "This method should return the value that was previously in the",
-            "given index, or null if that does not apply."
-        );
+        // throw Kamayan.todo(
+        //     "The set(int, Object) method should set the value at the index",
+        //     "defined in the first argument such that list.get(index) will",
+        //     "return the second argument.",
+        //     "",
+        //     "If the index is negative, an IndexOutOfBoundsException should be",
+        //     "thrown.",
+        //     "",
+        //     "If the index is bigger than the current size of the linked list,",
+        //     "the links should be adjusted to fit the new index. All indexes",
+        //     "between the former last element and the new index should be",
+        //     "initialized with null.",
+        //     "",
+        //     "The size after this method is called depends on the index",
+        //     "provided. An existing index would not affect the size, but an",
+        //     "index greater than the last index will add the difference to the",
+        //     "size.",
+        //     "",
+        //     "This method should return the value that was previously in the",
+        //     "given index, or null if that does not apply."
+        // );
+
+        checkLowerBound(index);
+
+        Node currentNode = goToIndexAndExpandList(index);
+
+        Object oldValue = currentNode.value;
+
+        currentNode.value = value;
+
+        return oldValue;
+    }
+
+    public Object delete(int index) {
+        // throw Kamayan.todo(
+        //     "The delete(int) method should delete the value at the provided",
+        //     "index and return it. The size should be 1 less than it was before",
+        //     "this method was called. The index must be within the bounds of the",
+        //     "LinkedList, or an IndexOutOfBoundsException should be thrown."
+        // );
+
+        checkBounds(index);
+
+        Object deletedValue;
+
+        if (index == 0) {
+            deletedValue = head.value;
+            head = head.child;
+        } else {
+            Node currentNode = goToIndexAndExpandList(index-1);
+            deletedValue = currentNode.child.value;
+            currentNode.child = currentNode.child.child;
+        }
+
+        size --;
+
+        return deletedValue;
     }
 
     private void checkBounds(int index) {
@@ -130,5 +165,25 @@ public class LinkedList {
         if (index >= size()) {
             throw new IndexOutOfBoundsException("Invalid index: " + index);
         }
+    }
+
+    private Node goToIndexAndExpandList(int index) {
+        if (head == null) {
+            head = new Node();
+            size ++;
+        }
+
+        Node currentNode = head;
+
+        for (int i=0; i < index; i++) {
+            if (currentNode.child == null) {
+                currentNode.child = new Node();
+                size ++;
+            }
+
+            currentNode = currentNode.child;
+        }
+
+        return currentNode;
     }
 }
