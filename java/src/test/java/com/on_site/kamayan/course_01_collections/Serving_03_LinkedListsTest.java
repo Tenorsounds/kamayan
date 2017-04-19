@@ -181,7 +181,7 @@ public class Serving_03_LinkedListsTest extends TestCase {
         assertEquals(43, list.get(3));
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void setCannotUseNegativeNumber() {
         LinkedList list = new LinkedList();
@@ -190,7 +190,7 @@ public class Serving_03_LinkedListsTest extends TestCase {
         assertEquals(0, list.size());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void setCanUseExistingIndexes() {
         LinkedList list = new LinkedList().add(0).add(1).add(2).add(3);
@@ -201,7 +201,7 @@ public class Serving_03_LinkedListsTest extends TestCase {
         Kamayan.times(4, (i) -> assertEquals(i + 1, list.get(i)));
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void setWithExistingIndexesDoesntUpdateTheSize() {
         LinkedList list = new LinkedList().add(0).add(1).add(2).add(3);
@@ -215,7 +215,7 @@ public class Serving_03_LinkedListsTest extends TestCase {
         assertEquals(4, list.size());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void setCanAddElementsToTheEndOfTheList() {
         LinkedList list = new LinkedList();

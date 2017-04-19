@@ -92,36 +92,58 @@ public class LinkedList {
         return currentNode.value;
     }
 
+    public Object set(int index, Object value) {
+        // throw Kamayan.todo(
+        //     "The set(int, Object) method should set the value at the index",
+        //     "defined in the first argument such that list.get(index) will",
+        //     "return the second argument.",
+        //     "",
+        //     "If the index is negative, an IndexOutOfBoundsException should be",
+        //     "thrown.",
+        //     "",
+        //     "If the index is bigger than the current size of the linked list,",
+        //     "the links should be adjusted to fit the new index. All indexes",
+        //     "between the former last element and the new index should be",
+        //     "initialized with null.",
+        //     "",
+        //     "The size after this method is called depends on the index",
+        //     "provided. An existing index would not affect the size, but an",
+        //     "index greater than the last index will add the difference to the",
+        //     "size.",
+        //     "",
+        //     "This method should return the value that was previously in the",
+        //     "given index, or null if that does not apply."
+        // );
+
+        checkLowerBound(index);
+
+        if (head == null) {
+            head = new Node(null);
+            size ++;
+        }
+
+        Node currentNode = head;
+
+        for (int i=0; i < index; i++) {
+            if (currentNode.child == null) {
+                currentNode.child = new Node(null);
+                size ++;
+            }
+
+            currentNode = currentNode.child;
+        }
+
+        currentNode.value = value;
+
+        return null;
+    }
+
     public Object delete(int index) {
         throw Kamayan.todo(
             "The delete(int) method should delete the value at the provided",
             "index and return it. The size should be 1 less than it was before",
             "this method was called. The index must be within the bounds of the",
             "LinkedList, or an IndexOutOfBoundsException should be thrown."
-        );
-    }
-
-    public Object set(int index, Object value) {
-        throw Kamayan.todo(
-            "The set(int, Object) method should set the value at the index",
-            "defined in the first argument such that list.get(index) will",
-            "return the second argument.",
-            "",
-            "If the index is negative, an IndexOutOfBoundsException should be",
-            "thrown.",
-            "",
-            "If the index is bigger than the current size of the linked list,",
-            "the links should be adjusted to fit the new index. All indexes",
-            "between the former last element and the new index should be",
-            "initialized with null.",
-            "",
-            "The size after this method is called depends on the index",
-            "provided. An existing index would not affect the size, but an",
-            "index greater than the last index will add the difference to the",
-            "size.",
-            "",
-            "This method should return the value that was previously in the",
-            "given index, or null if that does not apply."
         );
     }
 
