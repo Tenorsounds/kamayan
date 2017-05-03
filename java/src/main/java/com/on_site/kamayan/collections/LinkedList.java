@@ -83,13 +83,7 @@ public class LinkedList {
 
         checkBounds(index);
 
-        Node currentNode = head;
-
-        for (int i=0; i < index; i++) {
-            currentNode = currentNode.child;
-        }
-
-        return currentNode.value;
+        return goToNodeAtIndex(index).value;
     }
 
     public Object set(int index, Object value) {
@@ -117,34 +111,43 @@ public class LinkedList {
 
         checkLowerBound(index);
 
-        if (head == null) {
-            head = new Node(null);
-            size ++;
-        }
+        Node currentNode = goToNodeAtIndex(index);
 
-        Node currentNode = head;
-
-        for (int i=0; i < index; i++) {
-            if (currentNode.child == null) {
-                currentNode.child = new Node(null);
-                size ++;
-            }
-
-            currentNode = currentNode.child;
-        }
+        Object oldValue = currentNode.value;
 
         currentNode.value = value;
 
-        return null;
+        return oldValue;
     }
 
     public Object delete(int index) {
-        throw Kamayan.todo(
-            "The delete(int) method should delete the value at the provided",
-            "index and return it. The size should be 1 less than it was before",
-            "this method was called. The index must be within the bounds of the",
-            "LinkedList, or an IndexOutOfBoundsException should be thrown."
-        );
+        // throw Kamayan.todo(
+        //     "The delete(int) method should delete the value at the provided",
+        //     "index and return it. The size should be 1 less than it was before",
+        //     "this method was called. The index must be within the bounds of the",
+        //     "LinkedList, or an IndexOutOfBoundsException should be thrown."
+        // );
+
+        checkBounds(index);
+
+        Object deletedValue;
+
+        if (index == 0) {
+            deletedValue = head.value;
+            head = head.child;
+            size --;
+            return deletedValue;
+        }
+
+        Node currentNode = goToNodeAtIndex(index-1);
+
+        deletedValue = currentNode.child.value;
+
+        currentNode.child = currentNode.child.child;
+
+        size --;
+
+        return deletedValue;
     }
 
     private void checkBounds(int index) {
@@ -162,5 +165,25 @@ public class LinkedList {
         if (index >= size()) {
             throw new IndexOutOfBoundsException("Invalid index: " + index);
         }
+    }
+
+    private Node goToNodeAtIndex (int index) {
+        if (head == null) {
+            head = new Node(null);
+            size ++;
+        }
+
+        Node currentNode = head;
+
+        for (int i=0; i < index; i++) {
+            if (currentNode.child == null) {
+                currentNode.child = new Node(null);
+                size ++;
+            }
+
+            currentNode = currentNode.child;
+        }
+
+        return currentNode;
     }
 }
