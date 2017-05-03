@@ -87,7 +87,7 @@ public class LinkedList {
 
         checkBounds(index);
 
-        return goToIndexAndExpandList(index).value;
+        return goToNodeAtIndex(index).value;
     }
 
     public Object set(int index, Object value) {
@@ -115,7 +115,7 @@ public class LinkedList {
 
         checkLowerBound(index);
 
-        Node currentNode = goToIndexAndExpandList(index);
+        Node currentNode = goToNodeAtIndex(index);
 
         Object oldValue = currentNode.value;
 
@@ -139,12 +139,15 @@ public class LinkedList {
         if (index == 0) {
             deletedValue = head.value;
             head = head.child;
-        } else {
-            Node currentNode = goToIndexAndExpandList(index-1);
-            deletedValue = currentNode.child.value;
-            currentNode.child = currentNode.child.child;
+            size --;
+            return deletedValue;
         }
 
+        Node currentNode = goToNodeAtIndex(index-1);
+
+        deletedValue = currentNode.child.value;
+
+        currentNode.child = currentNode.child.child;
         size --;
 
         return deletedValue;
@@ -167,9 +170,9 @@ public class LinkedList {
         }
     }
 
-    private Node goToIndexAndExpandList(int index) {
+    private Node goToNodeAtIndex (int index) {
         if (head == null) {
-            head = new Node();
+            head = new Node(null);
             size ++;
         }
 
@@ -177,7 +180,7 @@ public class LinkedList {
 
         for (int i=0; i < index; i++) {
             if (currentNode.child == null) {
-                currentNode.child = new Node();
+                currentNode.child = new Node(null);
                 size ++;
             }
 
