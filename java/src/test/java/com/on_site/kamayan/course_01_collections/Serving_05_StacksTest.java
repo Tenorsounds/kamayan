@@ -69,7 +69,7 @@ public class Serving_05_StacksTest extends TestCase {
         return result;
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void testPushAddsElements() throws Exception {
         Stack stack = new Stack();
@@ -82,7 +82,7 @@ public class Serving_05_StacksTest extends TestCase {
         assertEquals(4, stack.size());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void testPushAddsToTheTopOfTheStack() throws Exception {
         Stack stack = new Stack();
@@ -97,7 +97,7 @@ public class Serving_05_StacksTest extends TestCase {
         assertEquals(Arrays.asList(42, 43, 1, 2), actualElements);
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void testPushReturnsSelfSoItCanBeChained() throws Exception {
         Stack stack = new Stack();
@@ -105,7 +105,7 @@ public class Serving_05_StacksTest extends TestCase {
         assertEquals(stack, stack.push(43));
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void testPushWithNoMaxSizeShouldntOverflow() throws Exception {
         Stack stack = new Stack();
@@ -113,7 +113,7 @@ public class Serving_05_StacksTest extends TestCase {
         assertEquals(1000, stack.size());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void testPushBeyondMaxSizeThrowsStackOverflowException() throws Exception {
         Stack stack = new Stack(5);

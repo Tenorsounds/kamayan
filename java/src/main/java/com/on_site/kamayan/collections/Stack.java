@@ -23,14 +23,22 @@ public class Stack {
     }
 
     public Stack push(Object value) {
-        throw Kamayan.todo(
-            "The push(Object) method should add the argument to the end of the",
-            "stack, which should increase the size by 1. The return value must",
-            "be this. If the maxSize was specified when constructing the Stack",
-            "(that is, it is not null), then a StackOverflowException should be",
-            "raised before adding the value if the stack is already at the",
-            "capacity."
-        );
+        // throw Kamayan.todo(
+        //     "The push(Object) method should add the argument to the end of the",
+        //     "stack, which should increase the size by 1. The return value must",
+        //     "be this. If the maxSize was specified when constructing the Stack",
+        //     "(that is, it is not null), then a StackOverflowException should be",
+        //     "raised before adding the value if the stack is already at the",
+        //     "capacity."
+        // );
+
+        if (maxSize != null && list.size() >= maxSize) {
+            throw new StackOverflowException("Stack is Full!");
+        }
+
+        list.add(value);
+
+        return this;
     }
 
     public Object pop() {
