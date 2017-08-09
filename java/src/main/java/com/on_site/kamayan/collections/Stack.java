@@ -32,8 +32,8 @@ public class Stack {
         //     "capacity."
         // );
 
-        if (maxSize != null && list.size() >= maxSize) {
-            throw new StackOverflowException("Stack is Full!");
+        if (maxSize != null && size() >= maxSize) {
+            throw new StackOverflowException("The Stack is Full!");
         }
 
         list.add(value);
@@ -42,23 +42,41 @@ public class Stack {
     }
 
     public Object pop() {
-        throw Kamayan.todo(
-            "The pop() method should remove and return the last value in the",
-            "stack. An IndexOutOfBoundsException should be raised if the Stack",
-            "is empty."
-        );
+        // throw Kamayan.todo(
+        //     "The pop() method should remove and return the last value in the",
+        //     "stack. An IndexOutOfBoundsException should be raised if the Stack",
+        //     "is empty."
+        // );
+
+        checkBounds();
+
+        return list.deleteLast();
     }
 
     public boolean isEmpty() {
-        throw Kamayan.todo(
-            "The isEmpty() method should return whether or not the size is 0."
-        );
+        // throw Kamayan.todo(
+        //     "The isEmpty() method should return whether or not the size is 0."
+        // );
+
+        return size() == 0;
     }
 
     public Object peek() {
-        throw Kamayan.todo(
-            "The peek() method should return the last value in the stack,",
-            "without removing any elements in the stack."
-        );
+        // throw Kamayan.todo(
+        //     "The peek() method should return the last value in the stack,",
+        //     "without removing any elements in the stack."
+        // );
+
+        checkBounds();
+
+        return list.last();
+    }
+
+    // Private Methods
+
+    private void checkBounds() {
+        if (isEmpty()) {
+            throw new IndexOutOfBoundsException("The Stack is Empty!");
+        }
     }
 }
