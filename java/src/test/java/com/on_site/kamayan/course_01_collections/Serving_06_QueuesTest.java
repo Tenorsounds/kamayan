@@ -65,7 +65,7 @@ import org.junit.Test;
  *   => c          +
  */
 public class Serving_06_QueuesTest extends TestCase {
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void internalCollectionImplementsEach() throws Exception {
         // The each method will be used for other tests, so if you decided not to use
@@ -83,7 +83,7 @@ public class Serving_06_QueuesTest extends TestCase {
         return result;
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void enqueueAddsElements() throws Exception {
         Queue queue = new Queue();
@@ -96,7 +96,7 @@ public class Serving_06_QueuesTest extends TestCase {
         assertEquals(4, queue.size());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void enqueueAddsToTheEndOfTheQueue() throws Exception {
         Queue queue = new Queue();
@@ -111,7 +111,7 @@ public class Serving_06_QueuesTest extends TestCase {
         assertEquals(Arrays.asList(42, 43, 1, 2), actualElements);
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void enqueueReturnsSelfSoItCanBeChained() throws Exception {
         Queue queue = new Queue();
@@ -119,7 +119,7 @@ public class Serving_06_QueuesTest extends TestCase {
         assertEquals(queue, queue.enqueue(43));
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void enqueueCanBeCalledALot() throws Exception {
         Queue queue = new Queue();
@@ -127,14 +127,14 @@ public class Serving_06_QueuesTest extends TestCase {
         assertEquals(1000, queue.size());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void dequeueRaisesAnErrorIfTheQueueIsEmpty() throws Exception {
         Queue queue = new Queue();
         assertThrows(IndexOutOfBoundsException.class, () -> queue.dequeue());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void dequeueReturnsTheFirstElementOfTheQueue() throws Exception {
         Queue queue = new Queue().enqueue(42);
@@ -143,7 +143,7 @@ public class Serving_06_QueuesTest extends TestCase {
         assertEquals(43, queue.dequeue());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void dequeueAltersTheSizeOfTheQueue() throws Exception {
         Queue queue = new Queue().enqueue(42).enqueue(43);
@@ -154,7 +154,7 @@ public class Serving_06_QueuesTest extends TestCase {
         assertEquals(0, queue.size());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void dequeueRaisesAnErrorIfTheQueueIsEmptyAfterBeingEmptied() throws Exception {
         Queue queue = new Queue().enqueue(42);
@@ -162,7 +162,7 @@ public class Serving_06_QueuesTest extends TestCase {
         assertThrows(IndexOutOfBoundsException.class, () -> queue.dequeue());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void dequeueReturnsTheFirstElementAdded() throws Exception {
         Queue queue = new Queue().enqueue(42).enqueue(43).enqueue(1).enqueue(2);
@@ -172,7 +172,7 @@ public class Serving_06_QueuesTest extends TestCase {
         assertEquals(2, queue.dequeue());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void emptyReturnsTrueForNewQueues() throws Exception {
         Queue queue = new Queue();
@@ -182,7 +182,7 @@ public class Serving_06_QueuesTest extends TestCase {
         assertTrue(queue.isEmpty());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void emptyReturnsTrueForQueuesThatHaveBeenEmptied() throws Exception {
         Queue queue = new Queue().enqueue(42);
@@ -190,7 +190,7 @@ public class Serving_06_QueuesTest extends TestCase {
         assertTrue(queue.isEmpty());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void emptyReturnsFalseForNonEmptyQueues() throws Exception {
         Queue queue = new Queue().enqueue(42);
@@ -199,7 +199,7 @@ public class Serving_06_QueuesTest extends TestCase {
         assertFalse(queue.isEmpty());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void emptyReturnsFalseForQueuesThatHaveBeenEmptiedAndGrownAgain() throws Exception {
         Queue queue = new Queue().enqueue(42).enqueue(43);
@@ -209,7 +209,7 @@ public class Serving_06_QueuesTest extends TestCase {
         assertFalse(queue.isEmpty());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void peekRaisesAnErrorIfTheQueueIsEmpty() throws Exception {
         Queue queue = new Queue();
@@ -219,7 +219,7 @@ public class Serving_06_QueuesTest extends TestCase {
         assertThrows(IndexOutOfBoundsException.class, () -> queue.peek());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void peekReturnsTheFirstValueOfTheQueue() throws Exception {
         Queue queue = new Queue().enqueue(42);
@@ -228,7 +228,7 @@ public class Serving_06_QueuesTest extends TestCase {
         assertEquals(42, queue.peek());
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void peekCanByCalledMultipleTimesWithoutAffectingTheSize() throws Exception {
         Queue queue = new Queue().enqueue(42);
